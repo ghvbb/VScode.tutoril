@@ -1,147 +1,280 @@
-<!DOCTYPE html>  <html lang="ar" dir="rtl">  
-<head>  
-  <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1" />  
-  <title>تعلم VS Code - الأكاديمية العربية</title>  
-  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet" />  
-  <style>  
-    /* الخط العربي */  
-    body {  
-      font-family: 'Cairo', sans-serif;  
-      margin: 0; padding: 0;  
-      background: #f9fafb;  
-      color: #222;  
-      line-height: 1.6;  
-      min-height: 100vh;  
-      display: flex;  
-      flex-direction: column;  
-    }  header {  
-  background: #007acc;  
-  color: white;  
-  padding: 1.5rem 2rem;  
-  text-align: center;  
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);  
-}  
-
-header h1 {  
-  margin: 0;  
-  font-weight: 700;  
-  font-size: 2rem;  
-}  
-
-main {  
-  flex-grow: 1;  
-  max-width: 900px;  
-  margin: 2rem auto;  
-  padding: 0 1rem;  
-}  
-
-section.lesson {  
-  background: white;  
-  border-radius: 10px;  
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);  
-  margin-bottom: 2rem;  
-  padding: 1.5rem 2rem;  
-  transition: box-shadow 0.3s ease;  
-}  
-
-section.lesson:hover {  
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);  
-}  
-
-section.lesson h2 {  
-  margin-top: 0;  
-  color: #007acc;  
-}  
-
-section.lesson p {  
-  margin: 1rem 0 1.5rem 0;  
-  font-size: 1.1rem;  
-  color: #444;  
-}  
-
-iframe {  
-  width: 100%;  
-  height: 315px;  
-  border: none;  
-  border-radius: 8px;  
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);  
-}  
-
-footer {  
-  background: #007acc;  
-  color: white;  
-  text-align: center;  
-  padding: 1rem 0;  
-  font-size: 0.9rem;  
-  margin-top: auto;  
-  user-select: none;  
-}  
-
-a {  
-  color: #007acc;  
-  text-decoration: none;  
-  font-weight: 600;  
-}  
-
-a:hover {  
-  text-decoration: underline;  
-}  
-
-/* زر الدعم */  
-.support {  
-  text-align: center;  
-  margin: 2rem 0 3rem 0;  
-}  
-
-.support a {  
-  background: #ffdd57;  
-  color: #222;  
-  padding: 0.8rem 1.5rem;  
-  border-radius: 50px;  
-  font-weight: 700;  
-  box-shadow: 0 4px 8px rgba(255,221,87,0.4);  
-  transition: background 0.3s ease;  
-  display: inline-block;  
-}  
-
-.support a:hover {  
-  background: #f9c846;  
-}  
-
-@media (max-width: 600px) {  
-  section.lesson {  
-    padding: 1rem 1.2rem;  
-  }  
-}
-
-  </style>  
-</head>  
-<body>  <header>  
-  <h1>أكاديمية تعلم VS Code بالعربي</h1>  
-</header>  <main>    <section class="lesson" id="lesson1">  
-    <h2>الدرس 1: ما هو Visual Studio Code؟</h2>  
-    <p>في هذا الدرس نتعرف على برنامج VS Code، بيئة تطوير خفيفة وسريعة، مناسبة لجميع لغات البرمجة.</p>  
-    <iframe src="https://www.youtube.com/embed/VqCgcpAypFQ" title="Visual Studio Code Tutorial for Beginners" allowfullscreen></iframe>  
-  </section>    <section class="lesson" id="lesson2">  
-    <h2>الدرس 2: تحميل وتثبيت VS Code</h2>  
-    <p>تعلم كيف تثبت VS Code على نظام ويندوز، لينكس، أو ماك خطوة بخطوة.</p>  
-    <iframe src="https://www.youtube.com/embed/tk961dCDn8k" title="Download and Install VS Code - Python Setup / Extensions" allowfullscreen></iframe>  
-  </section>    <section class="lesson" id="lesson3">  
-    <h2>الدرس 3: أهم الإضافات Extensions في VS Code</h2>  
-    <p>أفضل الإضافات لتحسين تجربة البرمجة، مثل Python، Live Server، وGitLens.</p>  
-    <iframe src="https://www.youtube.com/embed/R9NQIbvDoR4" title="Top VS Code Extensions" allowfullscreen></iframe>  
-  </section>    <section class="lesson" id="lesson4">  
-    <h2>الدرس 4: تشغيل كود بايثون في VS Code</h2>  
-    <p>شرح بسيط لكيفية إعداد بيئة البايثون وتشغيل الأكواد من داخل VS Code.</p>  
-    <iframe src="https://www.youtube.com/embed/9Os0o3wzS_I" title="Run Python Code in VS Code" allowfullscreen></iframe>  
-  </section>    <section class="lesson" id="lesson5">  
-    <h2>الدرس 5: أهم اختصارات لوحة المفاتيح في VS Code</h2>  
-    <p>اختصارات تساعدك تبرمج أسرع وتكون محترف.</p>  
-    <iframe src="https://youtu.be/sAK66j0Ksmc?si=hwB59IHn72h3HLm" title="VS Code Keyboard Shortcuts" allowfullscreen></iframe>  
-  </section>    <div class="support">  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Distro Showcase</title>
     
-  </div>  </main>  <footer>  
-  حقوق الموقع © 2025 – أكاديمية تعلم VS Code بالعربي  
-</footer>  </body>  
-</html> 
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles for the page */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e5e7eb;
+            overflow-x: hidden; /* Prevents horizontal scroll */
+        }
+
+        /* Background blur effect with animated gradients */
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-blur::before,
+        .background-blur::after {
+            content: '';
+            position: absolute;
+            width: 50vw;
+            height: 50vw;
+            max-width: 600px;
+            max-height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.2;
+            animation: pulse 20s infinite alternate;
+        }
+
+        .background-blur::before {
+            background: radial-gradient(circle, rgba(99,102,241,1) 0%, rgba(168,85,247,1) 100%);
+            top: -10%;
+            left: -10%;
+        }
+
+        .background-blur::after {
+            background: radial-gradient(circle, rgba(59,130,246,1) 0%, rgba(34,197,94,1) 100%);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: -10s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8) rotate(0deg); }
+            100% { transform: scale(1.2) rotate(30deg); }
+        }
+
+        /* Glassmorphism effect for cards */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Logo styling */
+        .distro-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover .distro-logo {
+            transform: scale(1.1);
+        }
+
+        /* Infinite logo scroller animation */
+        .scroller {
+            overflow: hidden;
+            -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+            mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+        }
+
+        .scroller-inner {
+            display: flex;
+            gap: 2rem;
+            width: max-content;
+            animation: scroll 40s linear infinite;
+        }
+        
+        .scroller-inner img {
+            height: 64px;
+            filter: grayscale(1) brightness(1.5);
+            transition: filter 0.3s ease;
+        }
+        
+        .scroller-inner img:hover {
+            filter: grayscale(0) brightness(1);
+        }
+
+        @keyframes scroll {
+            to {
+                transform: translateX(calc(-50% - 1rem));
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="background-blur"></div>
+
+    <div class="relative min-h-screen w-full px-4 py-16 sm:px-6 lg:px-8">
+        <header class="text-center mb-16">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white">
+                Linux Distro Universe
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-400">
+                Discover the perfect Linux distribution for your journey.
+            </p>
+        </header>
+
+        <main>
+            <!-- Beginner Distros Section -->
+            <section id="beginner-distros" class="mb-20">
+                <h2 class="text-3xl font-bold text-center mb-10 text-white">Top 10 for Beginners</h2>
+                <div id="beginner-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
+                    <!-- Cards will be injected here by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Professional Distros Section -->
+            <section id="pro-distros" class="mb-20">
+                <h2 class="text-3xl font-bold text-center mb-10 text-white">Top 10 for Professionals</h2>
+                <div id="pro-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
+                    <!-- Cards will be injected here by JavaScript -->
+                </div>
+            </section>
+            
+            <!-- Logo Loop Section -->
+            <section id="logo-loop" class="py-16">
+                 <h2 class="text-3xl font-bold text-center mb-10 text-white">Distro Showcase Loop</h2>
+                 <div class="scroller">
+                     <div id="scroller-inner" class="scroller-inner">
+                         <!-- Logos will be injected here by JavaScript -->
+                     </div>
+                 </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 py-8 border-t border-gray-800">
+            <p class="text-gray-500">all proced by ghvbb 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- DATA: Linux Distributions ---
+        // Using direct image links for simplicity. SVGs would be ideal.
+        const beginnerDistros = [
+            { name: 'Ubuntu', logo: 'https://assets.ubuntu.com/v1/29985a98-ubuntu-logo32.png', desc: 'The most popular choice, known for its ease of use and strong community support.' },
+            { name: 'Linux Mint', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Linux_Mint_logo_without_wordmark.svg/1200px-Linux_Mint_logo_without_wordmark.svg.png', desc: 'Elegant and user-friendly, based on Ubuntu. Great for Windows converts.' },
+            { name: 'Zorin OS', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Zorin_OS_Logo.svg/1024px-Zorin_OS_Logo.svg.png', desc: 'Designed to look and feel like Windows, making the transition seamless.' },
+            { name: 'Pop!_OS', logo: 'https://avatars.githubusercontent.com/u/30249487?s=280&v=4', desc: 'Created by System76, it offers a polished experience, especially for gaming and creative work.' },
+            { name: 'Elementary OS', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Elementary_logo.svg/1200px-Elementary_logo.svg.png', desc: 'A beautiful and fast replacement for macOS and Windows with a focus on design.' },
+            { name: 'Manjaro', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Manjaro-logo.svg/1200px-Manjaro-logo.svg.png', desc: 'Based on Arch Linux, but provides an easy, user-friendly installation and setup.' },
+            { name: 'Fedora', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Fedora_icon_%282021%29.svg/1200px-Fedora_icon_%282021%29.svg.png', desc: 'A cutting-edge distro sponsored by Red Hat, great for developers who want the latest software.' },
+            { name: 'MX Linux', logo: 'https://mxlinux.org/images/mx-logo-square-500.png', desc: 'A mid-weight OS that is stable, efficient, and easy to learn.' },
+            { name: 'EndeavourOS', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/EndeavourOS_logo.svg/1200px-EndeavourOS_logo.svg.png', desc: 'A terminal-centric distro that brings the power of Arch Linux in an accessible way.' },
+            { name: 'Garuda Linux', logo: 'https://wiki.garudalinux.org/images/garuda-eagle-logo.png', desc: 'A performance-oriented, visually stunning distro based on Arch, with a focus on gaming.' }
+        ];
+
+        const proDistros = [
+            { name: 'Debian', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Debian-OpenLogo.svg/1200px-Debian-OpenLogo.svg.png', desc: 'The rock-solid foundation for many other distros (like Ubuntu). Valued for its extreme stability.' },
+            { name: 'Arch Linux', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Archlinux-logo-standard-version.svg/1200px-Archlinux-logo-standard-version.svg.png', desc: 'A lightweight, flexible "do-it-yourself" distro for users who want to build their system from the ground up.' },
+            { name: 'AlmaLinux', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/AlmaLinux_OS_Logo.svg/1200px-AlmaLinux_OS_Logo.svg.png', desc: 'A free, enterprise-grade replacement for CentOS, binary-compatible with Red Hat Enterprise Linux.' },
+            { name: 'openSUSE', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/OpenSUSE_logo.svg/1200px-OpenSUSE_logo.svg.png', desc: 'Known for its powerful YaST configuration tool and two versions: stable Leap and rolling Tumbleweed.' },
+            { name: 'Kali Linux', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Kali-dragon-icon.svg/1200px-Kali-dragon-icon.svg.png', desc: 'The industry standard for penetration testing and digital forensics, pre-loaded with security tools.' },
+            { name: 'Gentoo', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Gentoo_g_logo.svg/1200px-Gentoo_g_logo.svg.png', desc: 'A source-based distro where everything is compiled from scratch for maximum optimization and control.' },
+            { name: 'Slackware', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Slackware_Logo.svg/1200px-Slackware_Logo.svg.png', desc: 'One of the oldest surviving Linux distros, it aims for simplicity and stability, following UNIX principles.' },
+            { name: 'NixOS', logo: 'https://nixos.org/logo/nixos-logo-only-dark.svg', desc: 'A unique distro built on a purely functional package manager, allowing for reliable and reproducible systems.' },
+            { name: 'Qubes OS', logo: 'https://www.qubes-os.org/attachment/icons/qubes-logo-icon-rgb.png', desc: 'A security-focused OS that isolates applications in secure virtual machines (qubes).' },
+            { name: 'Alpine Linux', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Alpine_Linux_logo.svg/1200px-Alpine_Linux_logo.svg.png', desc: 'An extremely lightweight, security-oriented distro commonly used in containers and embedded systems.' }
+        ];
+
+        // --- FUNCTIONS ---
+
+        /**
+         * Creates and injects distro cards into the DOM.
+         * @param {Array} distros - The array of distro objects.
+         * @param {string} gridId - The ID of the grid element to inject cards into.
+         */
+        function populateGrid(distros, gridId) {
+            const grid = document.getElementById(gridId);
+            if (!grid) return;
+
+            distros.forEach(distro => {
+                const cardHTML = `
+                    <div class="card rounded-2xl p-6 flex flex-col items-start">
+                        <div class="flex items-center gap-4 mb-4">
+                            <img src="${distro.logo}" alt="${distro.name} Logo" class="distro-logo" onerror="this.style.display='none'">
+                            <h3 class="text-xl font-bold text-white">${distro.name}</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed">${distro.desc}</p>
+                    </div>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+        }
+        
+        /**
+         * Populates the infinite scroller with all distro logos.
+         */
+        function populateScroller() {
+            const scrollerInner = document.getElementById('scroller-inner');
+            if (!scrollerInner) return;
+            
+            const allDistros = [...beginnerDistros, ...proDistros];
+            // Duplicate the array for a seamless loop
+            const logos = [...allDistros, ...allDistros]; 
+            
+            logos.forEach(distro => {
+                const imgHTML = `<img src="${distro.logo}" alt="${distro.name} Logo" title="${distro.name}" onerror="this.style.display='none'">`;
+                scrollerInner.innerHTML += imgHTML;
+            });
+        }
+
+        // --- EVENT LISTENERS & INITIALIZATION ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Populate the grids with distro cards
+            populateGrid(beginnerDistros, 'beginner-grid');
+            populateGrid(proDistros, 'pro-grid');
+            
+            // Populate the infinite logo scroller
+            populateScroller();
+
+            // Intersection Observer for fade-in animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            // Observe all cards
+            document.querySelectorAll('.card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+
+</body>
+</html>
