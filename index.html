@@ -1,554 +1,348 @@
+
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux distro choise ! </title>
+    <title>The world of Linux ! </title>
 
-    <!-- Core Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- THE STYLESHEET OF THE GODS -->
     <style>
         :root {
-            --bg-color: #000000;
+            --bg-color: #050505;
             --text-color: #e5e7eb;
-            --glow-1: #0ea5e9; /* Sky Blue */
-            --glow-2: #8b5cf6; /* Vivid Violet */
-            --glow-3: #10b981; /* Emerald Green */
-            --glass-bg: rgba(18, 18, 18, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --spotlight-color: rgba(255, 255, 255, 0.05);
+            --glow-1: #3b82f6; /* Blue */
+            --glow-2: #8b5cf6; /* Purple */
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.1);
         }
 
-        /* --- GOD-MODE ANIMATED BACKGROUND --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background: #000;
+            background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden;
-            cursor: none; /* Hide default cursor */
         }
-        #background-canvas {
+
+        .background-container {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            overflow: hidden;
+            filter: blur(150px);
         }
 
-        /* --- NEXT-LEVEL CUSTOM CURSOR --- */
-        .cursor-dot, .cursor-outline {
-            position: fixed;
-            top: 0; left: 0;
-            pointer-events: none;
+        .glow-blob {
+            position: absolute;
+            width: 40vw;
+            height: 40vw;
+            max-width: 500px;
+            max-height: 500px;
             border-radius: 50%;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-        }
-        .cursor-dot {
-            width: 8px; height: 8px;
-            background-color: var(--glow-1);
-        }
-        .cursor-outline {
-            width: 40px; height: 40px;
-            border: 2px solid var(--glow-2);
-            transition: transform 0.2s ease-out, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
-        }
-        .cursor-outline.hover {
-            transform: translate(-50%, -50%) scale(1.5);
-            border-color: var(--glow-1);
+            opacity: 0.3;
+            transition: transform 0.5s ease-out;
         }
 
-        /* --- THE ULTIMATE MAGNETIC GLASS CARD --- */
+        #blob1 { background-color: var(--glow-1); }
+        #blob2 { background-color: var(--glow-2); }
+
+        .animated-title span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            animation: reveal-char 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes reveal-char {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .animated-subtitle {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fade-in-up 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes fade-in-up {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid var(--glass-border);
-            border-radius: 1.5rem; /* Even rounder */
+            background: var(--card-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--card-border);
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+                        opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+                        box-shadow 0.3s ease;
             transform-style: preserve-3d;
             position: relative;
             overflow: hidden;
-            transition: border-color 0.4s ease, box-shadow 0.4s ease;
-            will-change: transform;
         }
-        .card:hover {
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 25px 50px -20px rgba(0,0,0,0.5);
-        }
-        
-        /* --- NEW: AURORA & SPOTLIGHT EFFECT --- */
-        .card .spotlight, .card .aurora {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            opacity: 0; transition: opacity 0.5s ease;
-            pointer-events: none; will-change: transform;
-        }
-        .card .spotlight {
-            background: radial-gradient(circle, var(--spotlight-color) 0%, transparent 40%);
-        }
-        .card .aurora {
-            background: radial-gradient(circle, var(--glow-2) 0%, var(--glow-1) 50%, var(--glow-3) 100%);
-            filter: blur(50px);
-            mix-blend-mode: color-dodge;
-        }
-        .card:hover .spotlight, .card:hover .aurora {
+
+        .card.is-visible {
             opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
-        /* --- ANIMATED HEADER --- */
-        .title-word {
-            display: inline-block;
-            overflow: hidden;
-        }
-        .title-word > span {
-            display: inline-block;
-            transform: translateY(100%);
+        .card:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
         }
 
-        /* --- AI FINDER UI --- */
-        #ai-input {
-            background: rgba(0,0,0,0.4);
-            border: 1px solid var(--glass-border);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        #ai-input:focus {
-            outline: none;
-            border-color: var(--glow-1);
-            box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
-        }
-        #ai-button {
-            background: linear-gradient(90deg, var(--glow-2), var(--glow-1));
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        #ai-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
-        }
-        /* AI Typing Effect Cursor */
-        #ai-thinking-text::after {
-            content: '▋';
-            display: inline-block;
-            animation: blink 0.7s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-30deg);
+            transition: left 0.7s ease-in-out;
         }
 
-        /* --- INFINITE SCROLLER --- */
+        .card:hover::before {
+            left: 150%;
+        }
+
+        .distro-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+        }
+
+        .card:hover .distro-logo {
+            transform: scale(1.2) rotate(-5deg);
+        }
+
         .scroller {
+            overflow: hidden;
             -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
             mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
         }
-        .scroller[data-animated="true"] .scroller-inner {
+
+        .scroller-inner {
+            display: flex;
+            gap: 3rem;
             width: max-content;
-            flex-wrap: nowrap;
-            animation: scroll 80s linear infinite; /* Slower, more majestic */
+            animation: scroll 60s linear infinite;
         }
+
+        .scroller-inner:hover {
+            animation-play-state: paused;
+        }
+
+        .scroller-inner img {
+            height: 64px;
+            filter: grayscale(1) opacity(0.7);
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .scroller-inner img:hover {
+            filter: grayscale(0) opacity(1);
+            transform: scale(1.1);
+        }
+
         @keyframes scroll {
-            to { transform: translate(calc(-50% - 2rem)); }
+            to {
+                transform: translateX(calc(-50% - 1.5rem));
+            }
+        }
+
+        /* New Section Title Animation */
+        .section-title {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section-title.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Background Canvas for Effects -->
-    <div id="background-canvas"></div>
+    <div class="background-container">
+        <div id="blob1" class="glow-blob"></div>
+        <div id="blob2" class="glow-blob"></div>
+    </div>
 
-    <!-- Custom Cursor Elements -->
-    <div class="cursor-outline"></div>
-    <div class="cursor-dot"></div>
-
-    <!-- Main Content Wrapper -->
-    <div class="relative min-h-screen w-full px-4 py-24 sm:px-6 lg:px-8">
-
-        <!-- ================================== -->
-        <!-- HEADER                             -->
-        <!-- ================================== -->
-        <header class="text-center mb-28">
-            <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-white">
-                <span class="title-word"><span>AI</span></span>
-                <span class="title-word"><span>Distro</span></span>
-                <span class="title-word"><span>Universe</span></span>
+    <div class="relative min-h-screen w-full px-4 py-16 sm:px-6 lg:px-8">
+        <header class="text-center mb-20">
+            <h1 class="animated-title text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400">
             </h1>
-            <p id="subtitle" class="mt-8 max-w-3xl mx-auto text-lg sm:text-xl text-gray-400">
-               Your personal guide to the world of Linux. Powered by intelligence.
+            <p class="animated-subtitle mt-6 max-w-3xl mx-auto text-lg text-gray-400">
+                An immersive dive into the world of Linux. Discover the perfect distribution for your journey.
             </p>
         </header>
 
-        <!-- ================================== -->
-        <!-- MAIN CONTENT                       -->
-        <!-- ================================== -->
         <main>
-
-            <!-- SECTION: AI DISTRO FINDER -->
-            <section id="ai-finder" class="card mb-28 p-8 max-w-4xl mx-auto">
-                <div class="spotlight"></div>
-                <div class="aurora"></div>
-                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4 text-white">AI Distro Finder</h2>
-                <p class="text-center text-gray-400 mb-8">
-                    Describe yourself or what you need. Are you a "pro gamer from windows" or a "new developer on an old laptop"?
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 items-center">
-                    <input type="text" id="ai-input" class="w-full text-lg px-5 py-4 rounded-xl text-white placeholder-gray-500" placeholder="Tell me what you need...">
-                    <button id="ai-button" class="w-full sm:w-auto px-8 py-4 text-lg font-bold text-white rounded-xl whitespace-nowrap">
-                        Find My Distro
-                    </button>
-                </div>
-                <div id="ai-result" class="mt-8 min-h-[150px]">
-                    <!-- AI recommendation will appear here -->
+            <section class="mb-24">
+                <h2 class="section-title text-3xl font-bold text-center mb-12 text-white">Top 10 for Beginners</h2>
+                <div id="beginner-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
                 </div>
             </section>
 
-            <!-- SECTION: POPULAR FOR BEGINNERS -->
-            <section class="mb-28">
-                <h2 class="text-4xl font-bold text-center mb-16 text-white">Popular for Beginners</h2>
-                <div id="beginner-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 max-w-7xl mx-auto"></div>
+            <section class="mb-24">
+                <h2 class="section-title text-3xl font-bold text-center mb-12 text-white">Top 10 for Professionals</h2>
+                <div id="pro-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
+                </div>
             </section>
 
-            <!-- SECTION: POWERHOUSE DISTRIBUTIONS -->
-            <section class="mb-28">
-                <h2 class="text-4xl font-bold text-center mb-16 text-white">Powerhouse Distributions</h2>
-                <div id="pro-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 max-w-7xl mx-auto"></div>
-            </section>
-            
-            <!-- SECTION: EXPERT & SPECIALIST -->
-            <section class="mb-28">
-                <h2 class="text-4xl font-bold text-center mb-16 text-white">For Experts & Specialists</h2>
-                <div id="expert-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 max-w-7xl mx-auto"></div>
-            </section>
-
-            <!-- SECTION: DISTRO SHOWCASE SCROLLER -->
             <section class="py-16">
-                 <h2 class="text-4xl font-bold text-center mb-16 text-white">Distro Showcase</h2>
-                 <div class="scroller" data-animated="true">
-                     <div class="scroller-inner flex gap-16">
-                        <!-- Logos will be injected by JS -->
-                     </div>
+                 <h2 class="section-title text-3xl font-bold text-center mb-12 text-white">Distro Showcase Loop</h2>
+                 <div class="scroller">
+                     <div id="scroller-inner" class="scroller-inner">
+                         </div>
                  </div>
             </section>
         </main>
 
-        <!-- ================================== -->
-        <!-- FOOTER                             -->
-        <!-- ================================== -->
-        <footer class="text-center mt-20 py-8 border-t border-white/10">
-            <p class="text-gray-500">© 2025 ghvbb | God Mode Edition</p>
+        <footer class="text-center mt-20 py-8 border-t border-gray-800/50">
+            <p class="text-gray-500">all proced by ghvbb 2025</p>
         </footer>
+    </div>
 
-    </div> <!-- End Main Content Wrapper -->
-
-    <!-- ========================================================================================= -->
-    <!-- JAVASCRIPT LOGIC STARTS HERE                                                              -->
-    <!-- ========================================================================================= -->
     <script>
-    // --- EXPANDED DATABASE WITH AI KEYWORDS & PHILOSOPHY ---
-    const distros = {
-        // --- Beginner Friendly ---
-        'Ubuntu': { type: 'beginner', logo: 'https://api.iconify.design/logos:ubuntu.svg', desc: 'The most popular choice, known for its ease of use and strong community support.', keywords: ['new','beginner','start','easy','popular','help','support','server','development'] },
-        'Linux Mint': { type: 'beginner', logo: 'https://api.iconify.design/logos:linux-mint.svg', desc: 'Elegant and user-friendly, based on Ubuntu. Great for Windows converts.', keywords: ['windows','switch','convert','beginner','easy','familiar','cinnamon','desktop'] },
-        'Zorin OS': { type: 'beginner', logo: 'https://api.iconify.design/simple-icons:zorin.svg?color=%23ffffff', desc: 'Designed to look and feel like Windows, making the transition seamless.', keywords: ['windows','switch','convert','easy','familiar','beautiful','premium'] },
-        'Pop!_OS': { type: 'beginner', logo: 'https://api.iconify.design/simple-icons:popos.svg?color=%23ffffff', desc: 'Created by System76, it offers a polished experience, especially for gaming.', keywords: ['gaming','play','nvidia','amd','steam','creative','polished','automatic'] },
-        'Elementary OS': { type: 'beginner', logo: 'https://api.iconify.design/simple-icons:elementary.svg?color=%23ffffff', desc: 'A beautiful and fast replacement for macOS with a focus on design.', keywords: ['macos','mac','apple','design','beautiful','clean','simple'] },
-        'MX Linux': { type: 'beginner', logo: 'https://api.iconify.design/simple-icons:mxlinux.svg?color=%23ffffff', desc: 'A mid-weight OS that is stable, efficient, and easy to learn.', keywords: ['old','laptop','computer','lightweight','fast','stable','older hardware'] },
-        
-        // --- Power User / Professional ---
-        'Fedora': { type: 'pro', logo: 'https://api.iconify.design/logos:fedora.svg', desc: 'A cutting-edge distro for developers who want the latest software.', keywords: ['developer','development','code','programming','latest','cutting-edge','red hat','server'] },
-        'Debian': { type: 'pro', logo: 'https://api.iconify.design/logos:debian.svg', desc: 'The rock-solid foundation for many other distros. Valued for its extreme stability.', keywords: ['server','stable','rock-solid','reliable','professional','sysadmin','expert'] },
-        'openSUSE': { type: 'pro', logo: 'https://api.iconify.design/logos:opensuse.svg', desc: 'Known for its powerful YaST tool and extreme stability in its "Leap" version.', keywords: ['professional', 'sysadmin', 'yast', 'stable', 'enterprise', 'server', 'leap', 'tumbleweed'] },
-        'Manjaro': { type: 'pro', logo: 'https://api.iconify.design/logos:manjaro.svg', desc: 'Brings the power of Arch Linux to everyone with an easy installation and setup.', keywords: ['arch','power','control','gaming','latest','rolling','intermediate'] },
-        'Garuda Linux': { type: 'pro', logo: 'https://api.iconify.design/simple-icons:garuda.svg?color=%23ffffff', desc: 'A performance-oriented, visually stunning distro based on Arch, with a focus on gaming.', keywords: ['gaming','performance','beautiful','arch','power','latest'] },
-        'EndeavourOS': { type: 'pro', logo: 'https://api.iconify.design/simple-icons:endeavouros.svg?color=%23ffffff', desc: 'A terminal-centric distro that brings the power of Arch in an accessible way.', keywords: ['arch', 'terminal', 'intermediate', 'minimal', 'community'] },
-        
-        // --- Expert & Specialist ---
-        'Arch Linux': { type: 'expert', logo: 'https://api.iconify.design/logos:archlinux.svg', desc: 'A lightweight, "do-it-yourself" distro for users who want full control.', keywords: ['expert','control','build','diy','minimal','lightweight','professional','programming','the arch way'] },
-        'Gentoo': { type: 'expert', logo: 'https://api.iconify.design/logos:gentoo.svg', desc: 'A source-based distro where everything is compiled for maximum optimization.', keywords: ['expert', 'compile', 'source', 'optimization', 'performance', 'control'] },
-        'Slackware': { type: 'expert', logo: 'https://api.iconify.design/simple-icons:slackware.svg?color=%23ffffff', desc: 'One of the oldest surviving distros, it aims for simplicity and stability, following UNIX principles.', keywords: ['oldest', 'unix', 'simple', 'stable', 'expert'] },
-        'Kali Linux': { type: 'expert', logo: 'https://api.iconify.design/simple-icons:kalilinux.svg?color=%23ffffff', desc: 'The industry standard for penetration testing and digital forensics.', keywords: ['security','hacking','pentesting','forensics','cybersecurity','professional'] },
-        'Qubes OS': { type: 'expert', logo: 'https://api.iconify.design/simple-icons:qubesos.svg?color=%23ffffff', desc: 'A security-focused OS that isolates applications in secure virtual machines (qubes).', keywords: ['security', 'privacy', 'isolation', 'xen', 'qubes', 'paranoid', 'expert'] },
-        'Alpine Linux': { type: 'expert', logo: 'https://api.iconify.design/logos:alpinelinux.svg', desc: 'An extremely lightweight, security-oriented distro commonly used in containers.', keywords: ['docker', 'container', 'lightweight', 'minimal', 'server', 'security', 'embedded'] },
-    };
+        document.addEventListener('DOMContentLoaded', () => {
+            const beginnerDistros = [
+                { name: 'Ubuntu', logo: 'https://api.iconify.design/logos:ubuntu.svg', desc: 'The most popular choice, known for its ease of use and strong community support.' },
+                { name: 'Linux Mint', logo: 'https://api.iconify.design/logos:linux-mint.svg', desc: 'Elegant and user-friendly, based on Ubuntu. Great for Windows converts.' },
+                { name: 'Zorin OS', logo: 'https://api.iconify.design/simple-icons:zorin.svg?color=%23ffffff', desc: 'Designed to look and feel like Windows, making the transition seamless.' },
+                { name: 'Pop!_OS', logo: 'https://api.iconify.design/simple-icons:popos.svg?color=%23ffffff', desc: 'Created by System76, it offers a polished experience, especially for gaming.' },
+                { name: 'Elementary OS', logo: 'https://api.iconify.design/simple-icons:elementary.svg?color=%23ffffff', desc: 'A beautiful and fast replacement for macOS and Windows with a focus on design.' },
+                { name: 'Manjaro', logo: 'https://api.iconify.design/logos:manjaro.svg', desc: 'Based on Arch Linux, but provides an easy, user-friendly installation and setup.' },
+                { name: 'Fedora', logo: 'https://api.iconify.design/logos:fedora.svg', desc: 'A cutting-edge distro sponsored by Red Hat, great for developers who want the latest software.' },
+                { name: 'MX Linux', logo: 'https://api.iconify.design/simple-icons:mxlinux.svg?color=%23ffffff', desc: 'A mid-weight OS that is stable, efficient, and easy to learn.' },
+                { name: 'EndeavourOS', logo: 'https://api.iconify.design/simple-icons:endeavouros.svg?color=%23ffffff', desc: 'A terminal-centric distro that brings the power of Arch Linux in an accessible way.' },
+                { name: 'Garuda Linux', logo: 'https://api.iconify.design/simple-icons:garuda.svg?color=%23ffffff', desc: 'A performance-oriented, visually stunning distro based on Arch, with a focus on gaming.' }
+            ];
 
-    /**
-     * This is the main execution function that runs after the DOM is loaded.
-     * It initializes all animations, populates dynamic content, and sets up event listeners.
-     */
-    document.addEventListener('DOMContentLoaded', () => {
+            const proDistros = [
+                { name: 'Debian', logo: 'https://api.iconify.design/logos:debian.svg', desc: 'The rock-solid foundation for many other distros (like Ubuntu). Valued for its extreme stability.' },
+                { name: 'Arch Linux', logo: 'https://api.iconify.design/logos:archlinux.svg', desc: 'A lightweight, flexible "do-it-yourself" distro for users who want to build their system from the ground up.' },
+                { name: 'AlmaLinux', logo: 'https://api.iconify.design/simple-icons:almalinux.svg?color=%23ffffff', desc: 'A free, enterprise-grade replacement for CentOS, binary-compatible with Red Hat Enterprise Linux.' },
+                { name: 'openSUSE', logo: 'https://api.iconify.design/logos:opensuse.svg', desc: 'Known for its powerful YaST configuration tool and two versions: stable Leap and rolling Tumbleweed.' },
+                { name: 'Kali Linux', logo: 'https://api.iconify.design/simple-icons:kalilinux.svg?color=%23ffffff', desc: 'The industry standard for penetration testing and digital forensics, pre-loaded with security tools.' },
+                { name: 'Gentoo', logo: 'https://api.iconify.design/logos:gentoo.svg', desc: 'A source-based distro where everything is compiled from scratch for maximum optimization and control.' },
+                { name: 'Slackware', logo: 'https://api.iconify.design/simple-icons:slackware.svg?color=%23ffffff', desc: 'One of the oldest surviving Linux distros, it aims for simplicity and stability, following UNIX principles.' },
+                { name: 'NixOS', logo: 'https://api.iconify.design/logos:nixos.svg', desc: 'A unique distro built on a purely functional package manager, allowing for reliable and reproducible systems.' },
+                { name: 'Qubes OS', logo: 'https://api.iconify.design/simple-icons:qubesos.svg?color=%23ffffff', desc: 'A security-focused OS that isolates applications in secure virtual machines (qubes).' },
+                { name: 'Alpine Linux', logo: 'https://api.iconify.design/logos:alpinelinux.svg', desc: 'An extremely lightweight, security-oriented distro commonly used in containers and embedded systems.' }
+            ];
 
-        // Register GSAP plugins for use
-        gsap.registerPlugin(ScrollTrigger);
+            const titleText = "Linux Distro Universe";
+            const titleElement = document.querySelector('.animated-title');
+            titleElement.innerHTML = titleText.split('').map((char, i) =>
+                `<span style="animation-delay: ${i * 0.05}s">${char === ' ' ? ' ' : char}</span>`
+            ).join('');
 
-        // ======================================================
-        // INITIALIZATION & DYNAMIC CONTENT POPULATION
-        // ======================================================
+            function populateGrid(distros, gridId) {
+                const grid = document.getElementById(gridId);
+                if (!grid) return;
 
-        /**
-         * Populates a grid with distro cards based on a filter function.
-         * @param {string} gridId - The ID of the grid element to populate.
-         * @param {function} filterFn - A function that returns true if a distro should be included.
-         */
-        function populateGrid(gridId, filterFn) {
-            const grid = document.getElementById(gridId);
-            if (!grid) return; // Exit if grid not found
-            grid.innerHTML = ''; // Clear existing content
-            Object.entries(distros)
-                .filter(filterFn)
-                .forEach(([name, distro]) => {
+                distros.forEach(distro => {
                     const card = document.createElement('div');
-                    card.className = 'card flex flex-col items-start p-6 h-full';
+                    card.className = 'card rounded-2xl p-6 flex flex-col items-start';
                     card.innerHTML = `
-                        <div class="spotlight"></div>
-                        <div class="aurora"></div>
-                        <div class="flex items-center gap-4 mb-4" style="transform: translateZ(50px);">
-                            <img src="${distro.logo}" alt="${name} Logo" class="h-12 w-12 drop-shadow-lg">
-                            <h3 class="text-xl font-bold text-white">${name}</h3>
+                        <div class="flex items-center gap-4 mb-4" style="transform: translateZ(20px);">
+                            <img src="${distro.logo}" alt="${distro.name} Logo" class="distro-logo" onerror="this.style.display='none'">
+                            <h3 class="text-xl font-bold text-white">${distro.name}</h3>
                         </div>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4 flex-grow" style="transform: translateZ(20px);">${distro.desc}</p>
+                        <p class="text-gray-300 text-sm leading-relaxed" style="transform: translateZ(10px);">${distro.desc}</p>
                     `;
                     grid.appendChild(card);
                 });
-        }
+            }
 
-        /**
-         * Populates the infinite logo scroller with all distro logos.
-         */
-        function populateScroller() {
-            const scrollerInner = document.querySelector('.scroller-inner');
-            if (!scrollerInner) return;
-            // Map all distro logos to img tags
-            const logos = Object.values(distros).map(d => `<img src="${d.logo}" alt="${d.name} Logo" title="${d.name}" class="h-16">`).join('');
-            // Duplicate logos for a seamless loop
-            scrollerInner.innerHTML = logos + logos;
-        }
-
-        // --- Call population functions ---
-        populateGrid('beginner-grid', ([, d]) => d.type === 'beginner');
-        populateGrid('pro-grid', ([, d]) => d.type === 'pro');
-        populateGrid('expert-grid', ([, d]) => d.type === 'expert');
-        populateScroller();
-
-
-        // ======================================================
-        // GOD-MODE ANIMATIONS
-        // ======================================================
-
-        // --- Animation 1: Animated Page Header ---
-        gsap.to(".title-word > span", {
-            y: 0,
-            duration: 1,
-            ease: "power3.out",
-            stagger: 0.2,
-            delay: 0.2
-        });
-        gsap.from("#subtitle", {
-            opacity: 0,
-            y: 20,
-            duration: 1,
-            ease: 'power2.out',
-            delay: 0.8
-        });
-
-        // --- Animation 2: Custom Cursor Movement ---
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        gsap.set([cursorDot, cursorOutline], { xPercent: -50, yPercent: -50 });
-        
-        window.addEventListener('mousemove', e => {
-            gsap.to(cursorDot, { duration: 0.2, x: e.clientX, y: e.clientY });
-            gsap.to(cursorOutline, { duration: 0.6, x: e.clientX, y: e.clientY, ease: 'power2.out' });
-        });
-        
-        // Add hover effect for cursor on interactive elements
-        document.querySelectorAll('a, button, input').forEach(el => {
-            el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
-        });
-
-        // --- Animation 3: Staggered Grid Reveal on Scroll ---
-        document.querySelectorAll('section').forEach(section => {
-            const cards = section.querySelectorAll('.card');
-            if (!cards.length) return; // Skip if no cards in section
-            gsap.from(cards, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 85%", // Start animation when section is 85% from the top
-                    toggleActions: "play none none none"
-                },
-                opacity: 0,
-                y: 60,
-                scale: 0.98,
-                rotationX: -10,
-                transformOrigin: "top center",
-                duration: 0.8,
-                ease: "power3.out",
-                stagger: 0.15 // Animate cards one by one
-            });
-        });
-
-        // --- Animation 4: Magnetic Card Tilt & Aurora Effect ---
-        document.querySelectorAll('.card').forEach(card => {
-            const spotlight = card.querySelector('.spotlight');
-            const aurora = card.querySelector('.aurora');
-
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left, y = e.clientY - rect.top;
-                const { width, height } = rect;
-
-                // Calculate rotation values for a 3D effect
-                const rotateX = (y / height - 0.5) * -30; // More intense rotation
-                const rotateY = (x / width - 0.5) * 30;
-
-                // Animate the card tilt with GSAP
-                gsap.to(card, {
-                    rotationX: rotateX,
-                    rotationY: rotateY,
-                    scale: 1.07, // More intense scale
-                    duration: 1,
-                    ease: "power3.out"
+            function populateScroller() {
+                const scrollerInner = document.getElementById('scroller-inner');
+                if (!scrollerInner) return;
+                const allDistros = [...beginnerDistros, ...proDistros];
+                const logos = [...allDistros, ...allDistros];
+                logos.forEach(distro => {
+                    scrollerInner.innerHTML += `<img src="${distro.logo}" alt="${distro.name} Logo" title="${distro.name}" onerror="this.style.display='none'">`;
                 });
+            }
 
-                // Animate the effects to follow the mouse
-                const sharedProps = {
-                    x: x - width / 2,
-                    y: y - height / 2,
-                    duration: 1,
-                    ease: "power3.out"
-                };
-                if (spotlight) gsap.to(spotlight, { ...sharedProps, scale: 1.5 });
-                if (aurora) gsap.to(aurora, { ...sharedProps, scale: 1.2 });
-            });
+            populateGrid(beginnerDistros, 'beginner-grid');
+            populateGrid(proDistros, 'pro-grid');
+            populateScroller();
 
-            // Reset card to its original state on mouse leave
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card, {
-                    rotationX: 0,
-                    rotationY: 0,
-                    scale: 1,
-                    duration: 1.5, // Slower, more graceful reset
-                    ease: "elastic.out(1, 0.5)"
-                });
-                // Fade out the effects
-                if (spotlight) gsap.to(spotlight, { opacity: 0, duration: 0.5 });
-                if (aurora) gsap.to(aurora, { opacity: 0, duration: 0.5 });
-            });
-
-            // Fade in the effects on mouse enter
-            card.addEventListener('mouseenter', () => {
-                if (spotlight) gsap.to(spotlight, { opacity: 1, duration: 0.5 });
-                if (aurora) gsap.to(aurora, { opacity: 1, duration: 0.5 });
-            });
-        });
-
-        // ======================================================
-        // AI DISTRO FINDER LOGIC
-        // ======================================================
-        const aiInput = document.getElementById('ai-input');
-        const aiButton = document.getElementById('ai-button');
-        const aiResult = document.getElementById('ai-result');
-
-        /**
-         * Main function to find and display the best distro match.
-         */
-        const findDistro = () => {
-            const query = aiInput.value.toLowerCase().trim();
-            if (query === '') return; // Do nothing if input is empty
-
-            // Give visual feedback on the button
-            gsap.to(aiButton, { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1 });
-
-            // 1. Show "Thinking" state with a typing effect
-            let thinkingText = "Analyzing your needs... Cross-referencing distributions... Found a perfect match!";
-            let currentText = '';
-            let i = 0;
-            aiResult.innerHTML = `<div class="flex justify-center items-center h-full"><p id="ai-thinking-text" class="text-xl text-gray-400"></p></div>`;
-            const thinkingElement = document.getElementById('ai-thinking-text');
-            
-            const typingInterval = setInterval(() => {
-                if (i < thinkingText.length) {
-                    currentText += thinkingText.charAt(i);
-                    thinkingElement.textContent = currentText;
-                    i++;
-                } else {
-                    clearInterval(typingInterval);
-                    // Proceed to find and show the result after typing
-                    showResult(query);
-                }
-            }, 50); // Typing speed
-        };
-
-        /**
-         * Calculates scores and displays the final result card.
-         * @param {string} query - The user's input query.
-         */
-        function showResult(query) {
-            // 2. Score distros based on keywords
-            let scores = {};
-            Object.keys(distros).forEach(name => scores[name] = 0);
-
-            Object.entries(distros).forEach(([name, data]) => {
-                data.keywords.forEach(keyword => {
-                    if (query.includes(keyword)) {
-                        scores[name] += (keyword.length > 5) ? 2 : 1; // Prioritize longer, more specific keywords
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('grid')) {
+                            const cards = entry.target.querySelectorAll('.card');
+                            cards.forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.classList.add('is-visible');
+                                }, index * 100);
+                            });
+                        } else {
+                            entry.target.classList.add('is-visible');
+                        }
+                        observer.unobserve(entry.target);
                     }
                 });
+            }, { rootMargin: "0px 0px -150px 0px" });
+
+            document.querySelectorAll('#beginner-grid, #pro-grid, .section-title').forEach(el => {
+                observer.observe(el);
             });
 
-            // 3. Find the best match
-            let bestMatch = 'Ubuntu'; // Default fallback
-            let maxScore = 0;
-            Object.entries(scores).forEach(([name, score]) => {
-                if (score > maxScore) {
-                    maxScore = score;
-                    bestMatch = name;
-                }
-            });
-            
-            // Intelligent Fallbacks if no keywords matched
-            if (maxScore === 0) {
-                if (query.includes('windows')) bestMatch = 'Linux Mint';
-                else if (query.includes('mac') || query.includes('apple')) bestMatch = 'Elementary OS';
-                else if (query.includes('old') || query.includes('slow')) bestMatch = 'MX Linux';
-            }
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const { width, height } = rect;
+                    const rotateX = (y / height - 0.5) * -15;
+                    const rotateY = (x / width - 0.5) * 15;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                });
 
-            // 4. Display the result with a cool animation
-            const winner = distros[bestMatch];
-            const resultCardHtml = `
-                <div class="bg-black/20 rounded-xl p-6 flex flex-col sm:flex-row items-center gap-6">
-                    <img src="${winner.logo}" alt="${bestMatch} Logo" class="w-24 h-24">
-                    <div>
-                        <p class="text-sm text-blue-400 font-bold">YOUR PERFECT MATCH</p>
-                        <h4 class="text-3xl font-bold text-white mt-1">${bestMatch}</h4>
-                        <p class="text-gray-300 mt-2">${winner.desc}</p>
-                    </div>
-                </div>
-            `;
-            aiResult.innerHTML = resultCardHtml;
-            gsap.from(aiResult.children[0], {
-                opacity: 0,
-                scale: 0.9,
-                y: 20,
-                duration: 0.8,
-                ease: 'elastic.out(1, 0.75)'
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                });
             });
-        }
 
-        // --- Event Listeners for AI Finder ---
-        aiButton.addEventListener('click', findDistro);
-        aiInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault(); // Prevent form submission
-                findDistro();
-            }
+            const blob1 = document.getElementById('blob1');
+            const blob2 = document.getElementById('blob2');
+            window.addEventListener('mousemove', (e) => {
+                const { clientX, clientY } = e;
+                const x = (clientX / window.innerWidth) * 100;
+                const y = (clientY / window.innerHeight) * 100;
+
+                blob1.style.transform = `translate(${x - 20}%, ${y - 20}%)`;
+                blob2.style.transform = `translate(${100 - x}%, ${100 - y}%)`;
+            });
         });
-    }); // End DOMContentLoaded
     </script>
+
 </body>
 </html>
