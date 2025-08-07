@@ -1,344 +1,361 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نور البصيرة | تجربة إيمانية متجددة</title>
 
-<!DOCTYPE html> 
- <html lang="en"> 
- <head> 
-     <meta charset="UTF-8"> 
-     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <meta name='admaven-placement' content=BqdU6qHU5>
-     <title>عالم توزيعات لينكس - فائق</title> 
-      
-     <script src="https://cdn.tailwindcss.com"></script> 
-      
-     <link rel="preconnect" href="https://fonts.googleapis.com"> 
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <!-- Google Fonts: IBM Plex Sans Arabic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-     <style> 
-         /* Custom CSS variables for easy theme management */ 
-         :root { 
-             --bg-color: #050505; 
-             --text-color: #e5e7eb; 
-             --glow-1: #3b82f6; /* Blue */ 
-             --glow-2: #8b5cf6; /* Purple */ 
-             --card-bg: rgba(255, 255, 255, 0.03); 
-             --card-border: rgba(255, 255, 255, 0.1); 
-         } 
+    <style>
+        /* --- CSS Variables (Theme) --- */
+        :root {
+            --bg-color: #050c1d;
+            --primary-color: #3b82f6; /* Blue */
+            --secondary-color: #a37b37; /* Gold */
+            --text-color: #e2e8f0; /* Light Gray/White */
+            --card-bg-color: rgba(17, 24, 39, 0.7); /* Dark blue with transparency */
+            --border-color: rgba(59, 130, 246, 0.2);
+            --font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
 
-         body { 
-             font-family: 'Inter', sans-serif; 
-             background-color: var(--bg-color); 
-             color: var(--text-color); 
-             overflow-x: hidden; 
-         } 
+        /* --- Global Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-         /* --- Dynamic Background --- */ 
-         .background-container { 
-             position: fixed; 
-             top: 0; 
-             left: 0; 
-             width: 100%; 
-             height: 100%; 
-             z-index: -1; 
-             overflow: hidden; 
-             filter: blur(150px); 
-         } 
+        html {
+            scroll-behavior: smooth;
+        }
 
-         .glow-blob { 
-             position: absolute; 
-             width: 40vw; 
-             height: 40vw; 
-             max-width: 500px; 
-             max-height: 500px; 
-             border-radius: 50%; 
-             opacity: 0.3; 
-             transition: transform 0.5s ease-out; 
-         } 
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.9;
+            text-align: right;
+            overflow-x: hidden;
+        }
 
-         #blob1 { background-color: var(--glow-1); } 
-         #blob2 { background-color: var(--glow-2); } 
+        /* --- Container --- */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 25px;
+        }
 
-         /* --- Header Animation --- */ 
-         .animated-title span { 
-             display: inline-block; 
-             opacity: 0; 
-             transform: translateY(30px) scale(0.9); 
-             animation: reveal-char 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
-         } 
+        /* --- Section Styling --- */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
 
-         @keyframes reveal-char { 
-             to { 
-                 opacity: 1; 
-                 transform: translateY(0) scale(1); 
-             } 
-         } 
-          
-         .animated-subtitle { 
-             opacity: 0; 
-             transform: translateY(20px); 
-             animation: fade-in-up 1s ease-out 0.5s forwards; 
-         } 
-          
-         @keyframes fade-in-up { 
-             to { 
-                 opacity: 1; 
-                 transform: translateY(0); 
-             } 
-         } 
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            color: var(--text-color);
+            position: relative;
+        }
 
-         /* --- Interactive 3D Card --- */ 
-         .card { 
-             background: var(--card-bg); 
-             backdrop-filter: blur(25px); 
-             -webkit-backdrop-filter: blur(25px); 
-             border: 1px solid var(--card-border); 
-             opacity: 0; 
-             transform: translateY(50px) scale(0.95); 
-             transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),  
-                         opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), 
-                         box-shadow 0.3s ease; 
-             transform-style: preserve-3d; 
-             position: relative; 
-             overflow: hidden; 
-         } 
-          
-         .card.is-visible { 
-             opacity: 1; 
-             transform: translateY(0) scale(1); 
-         } 
+        .section-title span {
+            color: var(--primary-color);
+        }
 
-         .card:hover { 
-             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); 
-         } 
-          
-         /* Card Shine Effect */ 
-         .card::before { 
-             content: ''; 
-             position: absolute; 
-             top: 0; 
-             left: -150%; 
-             width: 70%; 
-             height: 100%; 
-             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); 
-             transform: skewX(-30deg); 
-             transition: left 0.7s ease-in-out; 
-         } 
-          
-         .card:hover::before { 
-             left: 150%; 
-         } 
+        /* --- Hero Section with 3D Model --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-         /* Logo styling */ 
-         .distro-logo { 
-             width: 48px; 
-             height: 48px; 
-             object-fit: contain; 
-             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); 
-         } 
-          
-         .card:hover .distro-logo { 
-             transform: scale(1.2) rotate(-5deg); 
-         } 
+        .spline-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
 
-         /* --- Infinite Logo Scroller --- */ 
-         .scroller { 
-             overflow: hidden; 
-             -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent); 
-             mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent); 
-         } 
+        /* This is a placeholder for the 3D model canvas */
+        .spline-container canvas {
+            outline: none !important;
+        }
 
-         .scroller-inner { 
-             display: flex; 
-             gap: 3rem; 
-             width: max-content; 
-             animation: scroll 60s linear infinite; 
-         } 
-          
-         .scroller-inner img { 
-             height: 64px; 
-             filter: grayscale(1) opacity(0.7); 
-             transition: filter 0.3s ease, transform 0.3s ease; 
-         } 
-          
-         .scroller-inner img:hover { 
-             filter: grayscale(0) opacity(1); 
-             transform: scale(1.1); 
-         } 
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+            background: rgba(5, 12, 29, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+        }
 
-         @keyframes scroll { 
-             to { 
-                 transform: translateX(calc(-50% - 1.5rem)); 
-             } 
-         } 
-     </style> 
- </head> 
- <body class="antialiased"> 
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
 
-     <div class="background-container"> 
-         <div id="blob1" class="glow-blob"></div> 
-         <div id="blob2" class="glow-blob"></div> 
-     </div> 
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #a0aec0; /* Lighter text color */
+            max-width: 600px;
+            margin: 15px auto 0;
+        }
 
-     <div class="relative min-h-screen w-full px-4 py-16 sm:px-6 lg:px-8"> 
-         <header class="text-center mb-20"> 
-             <h1 class="animated-title text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400"> 
-                 </h1> 
-             <p class="animated-subtitle mt-6 max-w-3xl mx-auto text-lg text-gray-400"> 
-                 An immersive dive into the world of Linux. Discover the perfect distribution for your journey. 
-             </p> 
-         </header> 
+        /* --- Methods Section (Cards with 3D Hover Effect) --- */
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+            perspective: 1000px; /* For 3D effect */
+        }
 
-         <main> 
-             <section class="mb-24"> 
-                 <h2 class="text-3xl font-bold text-center mb-12 text-white">Top 10 for Beginners</h2> 
-                 <div id="beginner-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto"> 
-                     </div> 
-             </section> 
+        .method-card {
+            background: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 35px;
+            text-align: center;
+            backdrop-filter: blur(10px); /* Glassmorphism */
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        box-shadow 0.5s;
+            transform-style: preserve-3d;
+        }
 
-             <section class="mb-24"> 
-                 <h2 class="text-3xl font-bold text-center mb-12 text-white">Top 10 for Professionals</h2> 
-                 <div id="pro-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto"> 
-                     </div> 
-             </section> 
-              
-             <section class="py-16"> 
-                  <h2 class="text-3xl font-bold text-center mb-12 text-white">Distro Showcase Loop</h2> 
-                  <div class="scroller"> 
-                      <div id="scroller-inner" class="scroller-inner"> 
-                          </div> 
-                  </div> 
-             </section> 
-         </main> 
+        .method-card:hover {
+            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--primary-color);
+        }
 
-         <footer class="text-center mt-20 py-8 border-t border-gray-800/50"> 
-             <p class="text-gray-500">all proced by ghvbb 2025</p> 
-         </footer> 
-     </div> 
+        .method-card .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+            color: var(--primary-color);
+        }
 
-     <script> 
-         document.addEventListener('DOMContentLoaded', () => { 
-             // --- DATA: Linux Distributions (with updated high-quality SVG logos) --- 
-             const beginnerDistros = [ 
-                 { name: 'Ubuntu', logo: 'https://api.iconify.design/logos:ubuntu.svg', desc: 'The most popular choice, known for its ease of use and strong community support.' }, 
-                 { name: 'Linux Mint', logo: 'https://api.iconify.design/logos:linux-mint.svg', desc: 'Elegant and user-friendly, based on Ubuntu. Great for Windows converts.' }, 
-                 { name: 'Zorin OS', logo: 'https://api.iconify.design/simple-icons:zorin.svg?color=%23ffffff', desc: 'Designed to look and feel like Windows, making the transition seamless.' }, 
-                 { name: 'Pop!_OS', logo: 'https://api.iconify.design/simple-icons:popos.svg?color=%23ffffff', desc: 'Created by System76, it offers a polished experience, especially for gaming.' }, 
-                 { name: 'Elementary OS', logo: 'https://api.iconify.design/simple-icons:elementary.svg?color=%23ffffff', desc: 'A beautiful and fast replacement for macOS and Windows with a focus on design.' }, 
-                 { name: 'Manjaro', logo: 'https://api.iconify.design/logos:manjaro.svg', desc: 'Based on Arch Linux, but provides an easy, user-friendly installation and setup.' }, 
-                 { name: 'Fedora', logo: 'https://api.iconify.design/logos:fedora.svg', desc: 'A cutting-edge distro sponsored by Red Hat, great for developers who want the latest software.' }, 
-                 { name: 'MX Linux', logo: 'https://api.iconify.design/simple-icons:mxlinux.svg?color=%23ffffff', desc: 'A mid-weight OS that is stable, efficient, and easy to learn.' }, 
-                 { name: 'EndeavourOS', logo: 'https://api.iconify.design/simple-icons:endeavouros.svg?color=%23ffffff', desc: 'A terminal-centric distro that brings the power of Arch Linux in an accessible way.' }, 
-                 { name: 'Garuda Linux', logo: 'https://api.iconify.design/simple-icons:garuda.svg?color=%23ffffff', desc: 'A performance-oriented, visually stunning distro based on Arch, with a focus on gaming.' } 
-             ]; 
+        .method-card h3 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
 
-             const proDistros = [ 
-                 { name: 'Debian', logo: 'https://api.iconify.design/logos:debian.svg', desc: 'The rock-solid foundation for many other distros (like Ubuntu). Valued for its extreme stability.' }, 
-                 { name: 'Arch Linux', logo: 'https://api.iconify.design/logos:archlinux.svg', desc: 'A lightweight, flexible "do-it-yourself" distro for users who want to build their system from the ground up.' }, 
-                 { name: 'AlmaLinux', logo: 'https://api.iconify.design/simple-icons:almalinux.svg?color=%23ffffff', desc: 'A free, enterprise-grade replacement for CentOS, binary-compatible with Red Hat Enterprise Linux.' }, 
-                 { name: 'openSUSE', logo: 'https://api.iconify.design/logos:opensuse.svg', desc: 'Known for its powerful YaST configuration tool and two versions: stable Leap and rolling Tumbleweed.' }, 
-                 { name: 'Kali Linux', logo: 'https://api.iconify.design/simple-icons:kalilinux.svg?color=%23ffffff', desc: 'The industry standard for penetration testing and digital forensics, pre-loaded with security tools.' }, 
-                 { name: 'Gentoo', logo: 'https://api.iconify.design/logos:gentoo.svg', desc: 'A source-based distro where everything is compiled from scratch for maximum optimization and control.' }, 
-                 { name: 'Slackware', logo: 'https://api.iconify.design/simple-icons:slackware.svg?color=%23ffffff', desc: 'One of the oldest surviving Linux distros, it aims for simplicity and stability, following UNIX principles.' }, 
-                 { name: 'NixOS', logo: 'https://api.iconify.design/logos:nixos.svg', desc: 'A unique distro built on a purely functional package manager, allowing for reliable and reproducible systems.' }, 
-                 { name: 'Qubes OS', logo: 'https://api.iconify.design/simple-icons:qubesos.svg?color=%23ffffff', desc: 'A security-focused OS that isolates applications in secure virtual machines (qubes).' }, 
-                 { name: 'Alpine Linux', logo: 'https://api.iconify.design/logos:alpinelinux.svg', desc: 'An extremely lightweight, security-oriented distro commonly used in containers and embedded systems.' } 
-             ]; 
+        .method-card p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #a0aec0;
+        }
 
-             // --- DYNAMIC CONTENT INJECTION --- 
+        /* --- Benefits Section (List) --- */
+        #benefits {
+            background: var(--bg-color);
+        }
 
-             // Animate Header Title 
-             const titleText = "Linux Distro Universe"; 
-             const titleElement = document.querySelector('.animated-title'); 
-             titleElement.innerHTML = titleText.split('').map((char, i) =>  
-                 `<span style="animation-delay: ${i * 0.05}s">${char === ' ' ? '&nbsp;' : char}</span>` 
-             ).join(''); 
+        .benefits-list li {
+            list-style: none;
+            background: var(--card-bg-color);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            border-right: 5px solid var(--primary-color);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
 
-             // Function to create and inject distro cards 
-             function populateGrid(distros, gridId) { 
-                 const grid = document.getElementById(gridId); 
-                 if (!grid) return; 
+        .benefits-list li:hover {
+            transform: translateX(-10px);
+            background-color: rgba(59, 130, 246, 0.1);
+        }
 
-                 distros.forEach(distro => { 
-                     const card = document.createElement('div'); 
-                     card.className = 'card rounded-2xl p-6 flex flex-col items-start'; 
-                     card.innerHTML = ` 
-                         <div class="flex items-center gap-4 mb-4" style="transform: translateZ(20px);"> 
-                             <img src="${distro.logo}" alt="${distro.name} Logo" class="distro-logo" onerror="this.style.display='none'"> 
-                             <h3 class="text-xl font-bold text-white">${distro.name}</h3> 
-                         </div> 
-                         <p class="text-gray-300 text-sm leading-relaxed" style="transform: translateZ(10px);">${distro.desc}</p> 
-                     `; 
-                     grid.appendChild(card); 
-                 }); 
-             } 
-              
-             // Function to populate the infinite scroller 
-             function populateScroller() { 
-                 const scrollerInner = document.getElementById('scroller-inner'); 
-                 if (!scrollerInner) return; 
-                 const allDistros = [...beginnerDistros, ...proDistros]; 
-                 const logos = [...allDistros, ...allDistros];  
-                 logos.forEach(distro => { 
-                     scrollerInner.innerHTML += `<img src="${distro.logo}" alt="${distro.name} Logo" title="${distro.name}" onerror="this.style.display='none'">`; 
-                 }); 
-             } 
+        .benefits-list .icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-left: 25px;
+            font-weight: bold;
+        }
 
-             populateGrid(beginnerDistros, 'beginner-grid'); 
-             populateGrid(proDistros, 'pro-grid'); 
-             populateScroller(); 
+        .benefits-list div {
+            font-size: 1.1rem;
+        }
 
-             // --- ANIMATIONS & INTERACTIONS --- 
+        /* --- CTA Section --- */
+        #cta {
+            text-align: center;
+        }
 
-             // 1. Staggered Card Animation on Scroll 
-             const observer = new IntersectionObserver((entries) => { 
-                 entries.forEach(entry => { 
-                     if (entry.isIntersecting) { 
-                         const cards = entry.target.querySelectorAll('.card'); 
-                         cards.forEach((card, index) => { 
-                             setTimeout(() => { 
-                                 card.classList.add('is-visible'); 
-                             }, index * 100); // Stagger delay 
-                         }); 
-                         observer.unobserve(entry.target); 
-                     } 
-                 }); 
-             }, { rootMargin: "0px 0px -150px 0px" }); 
+        #cta p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #a0aec0;
+        }
 
-             document.querySelectorAll('#beginner-grid, #pro-grid').forEach(grid => { 
-                 observer.observe(grid); 
-             }); 
+        .cta-button {
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 18px 50px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 500;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
 
-             // 2. Interactive 3D Card Tilt Effect 
-             document.querySelectorAll('.card').forEach(card => { 
-                 card.addEventListener('mousemove', (e) => { 
-                     const rect = card.getBoundingClientRect(); 
-                     const x = e.clientX - rect.left; 
-                     const y = e.clientY - rect.top; 
-                     const { width, height } = rect; 
-                     const rotateX = (y / height - 0.5) * -15; // Max 7.5 deg tilt 
-                     const rotateY = (x / width - 0.5) * 15;  // Max 7.5 deg tilt 
-                     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`; 
-                 }); 
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
+            background: var(--secondary-color);
+            color: var(--bg-color);
+        }
 
-                 card.addEventListener('mouseleave', () => { 
-                     card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)'; 
-                 }); 
-             }); 
-              
-             // 3. Mouse-tracking Background Glow 
-             const blob1 = document.getElementById('blob1'); 
-             const blob2 = document.getElementById('blob2'); 
-             window.addEventListener('mousemove', (e) => { 
-                 const { clientX, clientY } = e; 
-                 const x = (clientX / window.innerWidth) * 100; 
-                 const y = (clientY / window.innerHeight) * 100; 
-                  
-                 blob1.style.transform = `translate(${x - 20}%, ${y - 20}%)`; 
-                 blob2.style.transform = `translate(${100 - x}%, ${100 - y}%)`; 
-             }); 
-         }); 
-     </script> 
+        /* --- Footer --- */
+        footer {
+            background: #020617; /* Darker than body */
+            color: #a0aec0;
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--border-color);
+        }
 
- </body> 
- </html>
-```
+        /* --- Animation on Scroll --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive Design for Tablet & Mobile --- */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3.5rem; }
+            .hero p { font-size: 1.3rem; }
+            .section-title { font-size: 2.4rem; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero p { font-size: 1.1rem; }
+            section { padding: 60px 0; }
+
+            .methods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .method-card:hover {
+                transform: scale(1.03); /* Simpler hover effect on mobile */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section with 3D Model -->
+    <header class="hero">
+        <!-- 3D MODEL EMBED CODE -->
+        <div class="spline-container">
+            <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.94/build/spline-viewer.js"></script>
+            <spline-viewer url="https://prod.spline.design/qW5r3X-eJc-04zCD/scene.splinecode"></spline-viewer>
+        </div>
+
+        <div class="hero-content reveal">
+            <h1>نور البصيرة</h1>
+            <p>رحلتك نحو ذاكرة أقوى وإيمان أسمى في عالم متجدد</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- Methods Section -->
+        <section id="methods">
+            <div class="container">
+                <h2 class="section-title reveal">كيف <span>تُسرّع</span> وتنشّط الذاكرة؟</h2>
+                <div class="methods-grid">
+                    <div class="method-card reveal">
+                        <span class="icon">📖</span>
+                        <h3>القرآن مفتاح العقول</h3>
+                        <p>قراءة القرآن وتدبر آياته من أعظم أسباب تنوير العقل. "وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ".</p>
+                    </div>
+                    <div class="method-card reveal">
+                        <span class="icon">✨</span>
+                        <h3>صفاء الروح بالتقوى</h3>
+                        <p>الابتعاد عن المعاصي يضيء البصيرة ويقوي الحفظ. تركها ينير الدرب ويجعل العقل أكثر استقبالاً للعلم.</p>
+                    </div>
+                    <div class="method-card reveal">
+                        <span class="icon">📿</span>
+                        <h3>ذكر الله الدائم</h3>
+                        <p>المداومة على الأذكار تجلو القلب وتهيئ العقل لاستقبال المعلومات وحفظها بسهولة ويسر.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section id="benefits">
+            <div class="container">
+                <h2 class="section-title reveal">فوائد دورتنا <span>"نور البصيرة"</span></h2>
+                <ul class="benefits-list">
+                    <li class="reveal"><span class="icon">01</span><div><strong>بيئة إيمانية محفزة:</strong> كن جزءاً من مجتمع يسعى للقرب من الله، مما يشجعك على الاستمرار.</div></li>
+                    <li class="reveal"><span class="icon">02</span><div><strong>السكينة والرحمة:</strong> مجالس الذكر والعلم هي أماكن تتنزل فيها السكينة وتغشاها الرحمة.</div></li>
+                    <li class="reveal"><span class="icon">03</span><div><strong>منهجية شرعية وعملية:</strong> طرق مجربة لتنشيط الذاكرة، مستنبطة من توجيهات العلماء والسلف.</div></li>
+                    <li class="reveal"><span class="icon">04</span><div><strong>متابعة وتشجيع مستمر:</strong> جرعات إيمانية يومية ونصائح عبر قناتنا لضمان أفضل النتائج.</div></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section id="cta">
+            <div class="container reveal">
+                <h2 class="section-title">هل أنت مستعد لتبدأ <span>رحلتك</span>؟</h2>
+                <p>انضم إلينا الآن وكن واحداً ممن يسعون لمرضاة الله من خلال العلم والعمل. افتح الباب لنور البصيرة ليضيء قلبك وعقلك.</p>
+                <!-- هام: استبدل # برابط قناتك الفعلي -->
+                <a href="https://t.me/+-psXw8z0-XpmYjRi" class="cta-button">انضم الآن إلى قناتنا</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 نور البصيرة. تصميم وتطوير لإحياء القلوب والعقول.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for reveal animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15 // Trigger when 15% of the element is visible
+        });
+
+        const elementsToReveal = document.querySelectorAll('.reveal');
+        elementsToReveal.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
